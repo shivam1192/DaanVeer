@@ -9,6 +9,10 @@ const user_schema = Joi.object({
     user_email: Joi.string().required().min(6).email(),
     user_password: Joi.string().required().min(6),
 })
+const login_user_schema = Joi.object({
+    user_email: Joi.string().required().min(6).email(),
+    user_password: Joi.string().required().min(6),
+})
 
 Route.post("/register",async (req,res)=>{
     const {user_name,user_email,user_password} = req.body;
@@ -38,10 +42,25 @@ Route.post("/register",async (req,res)=>{
             }catch(error){
                 console.log(error)
             }
-        }
-        
+        }   
     }
-    
+})
+
+
+Route.post("/login",async(req,res)=>{
+    const {user_email,user_password} = req.body
+    const got_email = await Mongoosemodal.findOne({user_email:user_email})
+    if(got_email){
+          const password_compare = await bcrypt.compare(user_password,got_email.user_password);
+          if(password_compare){
+              res.send("Congratulation u are logged in")
+          }else{
+              res.send("Your password is incorrect");
+          }
+    }
+    else{
+        res.send("id not exist register now");
+    }
 })
 
 module.exports = Route;
