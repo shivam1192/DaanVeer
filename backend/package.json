@@ -1,11 +1,15 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "a backend for project",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "shivam agarwal",
-  "license": "ISC"
+  "author": "shivam",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
 }
