@@ -66,23 +66,4 @@ Route.post("/login",async(req,res)=>{
     }
 })
 
-// Route.post("/logout",(req,res)=>{
-//     res.clearCookie("refreshtoken",{path});
-//     return res.send("Logged out")
-// })
-
-// Route.get("/protected",async(req,res)=>{
-//     const token = req.header('auth-token')
-//     if(!token){
-//         res.send("token not verified");
-//     }
-//     else{
-//         try{
-//             const verified = Jwt.verify(token,process.env.RANDOM_STRING)
-//             console.log(verified)
-//         }catch(err){
-//             res.send(err)
-//         }
-//     }
-// })
 module.exports = Route;
