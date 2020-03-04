@@ -22,6 +22,9 @@ const mongooseSchema = mongoose.Schema({
     //     min:10,
     //     max:10
     // }
+    refreshtoken:{
+        type:String
+    }
 })
 
 const mongooseModal = mongoose.model("users",mongooseSchema)
