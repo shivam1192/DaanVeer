@@ -4,8 +4,8 @@ const Mongoosemodal = require("../Modals/schema");
 const Joi = require("@hapi/joi");
 const bcrypt = require("bcryptjs");
 const Jwt = require("jsonwebtoken");
-
-
+const {accesstoken,refreshtoken,sendaccesstoken,sendrefreshtoken} = require("../function/jwt");
+const {isAuth} = require('../function/isAuth')
 const user_schema = Joi.object({
     user_name: Joi.string().required().min(6),
     user_email: Joi.string().required().min(6).email(),
@@ -56,8 +56,19 @@ Route.post("/login",async(req,res)=>{
     if(got_email){
           const password_compare = await bcrypt.compare(user_password,got_email.user_password);
           if(password_compare){
-              res.send("logged")
-          }else{
+              try{
+                 const access = accesstoken(got_email._id)
+                 const refresh = refreshtoken(got_email._id)
+                //  store refresh in db
+                const set= await Mongoosemodal.updateOne({_id:got_email._id},{$set : {refreshtoken: refresh}})
+                // send refrestoken as a cookie and accesscookie as a regular expression
+                sendrefreshtoken(res,refresh)
+                 sendaccesstoken(res,req,access)              
+              }catch(error){
+                  console.log(error)
+              }
+          } 
+          else{
               res.send("Your password is incorrect");
           }
     }
@@ -66,4 +77,46 @@ Route.post("/login",async(req,res)=>{
     }
 })
 
+Route.post('/logout',(req,res)=>{
+    res.clearCookie("refreshtoken",{path:'/refresh_token'})
+    return res.send("user logged out")
+})
+
+Route.post('/protected', async(req,res)=>{
+    try{
+                 const id = isAuth(req)
+                 if(id){
+                     res.send("This is protected data")
+                 }
+                 else{
+                     console.log("not logged in")
+                 }
+
+    }catch(err){
+        res.send("not permitted")
+    }
+})
+
+Route.post('/refresh_token',async(req,res)=>{
+    const r = req.cookies.refreshtoken;
+    if(!r) return res.send({accesstoken:''})
+    let payload = null
+    try{
+         payload = Jwt.verify(r,process.env.REFRESH_TOKEN)
+    }catch(err){
+        return res.send({accesstoken:''})
+    }
+    const user = await Mongoosemodal.find({_id:payload.id})
+        if(!user) return res.send({accesstoken:''})
+    if(!user.refreshtoken==r) return res.send({accesstoken:''})
+
+    const access = accesstoken(user._id)
+    const refresh = refreshtoken(user._id)
+
+
+        const set= await Mongoosemodal.updateOne({_id:user._id},{$set : {refreshtoken: r}})
+                // send refrestoken as a cookie and accesscookie as a regular expression
+                sendrefreshtoken(res,refresh) 
+                return res.send({accesstoken:access})
+})
 module.exports = Route;
