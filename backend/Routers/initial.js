@@ -22,12 +22,12 @@ Route.post("/register",async (req,res)=>{
     const validation = user_schema.validate(req.body)
 
     if(validation.error){
-        res.send(validation.error.details[0].message)
+        res.status(203).send(validation.error.details[0].message)
     }
     else{
         const email_duplicate = await Mongoosemodal.findOne({user_email:user_email});
         if(email_duplicate){
-            res.send("email already exist")
+            res.status(203).send("email already exist")
                 }
         else{
             
@@ -44,7 +44,7 @@ Route.post("/register",async (req,res)=>{
                    const savepost = await new_user.save();
                    res.send(savepost._id)
             }catch(error){
-                console.log(error)
+                res.status(203).send("Something wrong occured")
             }
         }   
     }

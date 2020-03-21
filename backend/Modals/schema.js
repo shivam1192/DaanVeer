@@ -16,12 +16,6 @@ const mongooseSchema = mongoose.Schema({
         required:true,
         min:6
     },
-    // user_mobile:{
-    //     type:Integer,
-    //     required:true,
-    //     min:10,
-    //     max:10
-    // }
     refreshtoken:{
         type:String
     }
