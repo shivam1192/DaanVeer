@@ -4,7 +4,7 @@ import {Link, Redirect} from 'react-router-dom'
 import {Card,CardContent,Typography,makeStyles,TextField,Button} from '@material-ui/core'
 import Axios from 'axios'
 import Loading from '../Structure/Loading'
-import Navbar from '../Structure/Navbar';
+import Navbar from '../Structure/Navbar'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 
   }));
 
-const Register = () => {
+const Login = () => {
     const {Load,setloadTrue,setloadFalse} = useContext(LoadContext)
 
     const [status,setStatus] = useState(false)
@@ -43,38 +43,29 @@ const Register = () => {
 
     const classes = useStyles();
 
+    
     const submitfunction = (event) =>{
         event.preventDefault()
-        setloadTrue()
-        Axios.post('http://localhost:4000/register',{
-            user_name: event.target.username.value,
-            user_email: event.target.useremail.value,
-            user_password: event.target.password.value
+        Axios.post('http://localhost:4000/login',{
+            user_email:event.target.useremail.value,
+            user_password:event.target.password.value
         }).then((res)=>{
-            if(res.status==200){
-                setStatus(false)
-            }else{
-                setStatus(true)
-                setError(res.data)
-            }   
-            setloadFalse()         
+            console.log(res)
         }).catch((err)=>{
             console.log(err)
-            setloadFalse()
         })
     }
-
     return ( 
         <div>
             {Load? <div><Loading/></div>
-            : 
+            :
             <div>
-            <Navbar/>
+                <Navbar/> 
             <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5" className={classes.text} >
-            CREATE ACCOUNT
+             Login
           </Typography><br/><br/>
           {status?
           <div>
@@ -85,16 +76,12 @@ const Register = () => {
           }
           <br/>
         <form id="form33" onSubmit={submitfunction}>
-          <TextField id="outlined-basic" label="Username" variant="outlined" className={classes.text} name="username" required/><br/><br/>
           <TextField id="outlined-basic" label="Email" variant="outlined" className={classes.text} name="useremail" required/><br/><br/>
           <TextField id="outlined-password-input" label="Password" type="password"  className={classes.text} name="password" autoComplete="current-password" variant="outlined" required/><br/><br/><br/>
           <Button variant="contained" color="primary" className={classes.text} type="submit">
-        SignUp
+        SignIn
       </Button><br/><br/>
       </form>
-      <Typography variant="caption" className={classes.text}>
-          Already have an account? <Link to='/login'>Login</Link>
-          </Typography>
         </CardContent>
       </div>
     </Card>
@@ -104,4 +91,4 @@ const Register = () => {
      );
 }
  
-export default Register;
+export default Login;
