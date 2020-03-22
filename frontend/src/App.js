@@ -7,7 +7,7 @@ import Dashboard from './Component/Dashboard'
 
 const App = () => {
     return (
-        <LoadContextProvider>
+        <LoadContextProvider>    
          <BrowserRouter>
              <Switch>
                  <Route path="/register" component={Register}/>

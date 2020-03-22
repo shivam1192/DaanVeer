@@ -40,7 +40,7 @@ const Register = () => {
 
     const [status,setStatus] = useState(false)
     const [error,setError] = useState()
-
+    const [register,setRegister] = useState(false)
     const classes = useStyles();
 
     const submitfunction = (event) =>{
@@ -53,6 +53,7 @@ const Register = () => {
         }).then((res)=>{
             if(res.status==200){
                 setStatus(false)
+                setRegister(true)
             }else{
                 setStatus(true)
                 setError(res.data)
@@ -64,44 +65,54 @@ const Register = () => {
         })
     }
 
-    return ( 
-        <div>
-            {Load? <div><Loading/></div>
-            : 
+    if(register){
+        return(<Redirect to="/login"/>)
+    }
+    else if(localStorage.getItem("access token")){
+        return(<Redirect to="/dashboard"/>)
+    }
+    else{
+        return ( 
             <div>
-            <Navbar/>
-            <Card className={classes.root}>
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5" className={classes.text} >
-            CREATE ACCOUNT
-          </Typography><br/><br/>
-          {status?
-          <div>
-          <Typography variant="caption" className={classes.texterror}>
-              *{error}
-            </Typography><br/><br/> </div>
-          :null
-          }
-          <br/>
-        <form id="form33" onSubmit={submitfunction}>
-          <TextField id="outlined-basic" label="Username" variant="outlined" className={classes.text} name="username" required/><br/><br/>
-          <TextField id="outlined-basic" label="Email" variant="outlined" className={classes.text} name="useremail" required/><br/><br/>
-          <TextField id="outlined-password-input" label="Password" type="password"  className={classes.text} name="password" autoComplete="current-password" variant="outlined" required/><br/><br/><br/>
-          <Button variant="contained" color="primary" className={classes.text} type="submit">
-        SignUp
-      </Button><br/><br/>
-      </form>
-      <Typography variant="caption" className={classes.text}>
-          Already have an account? <Link to='/login'>Login</Link>
-          </Typography>
-        </CardContent>
-      </div>
-    </Card>
-    </div>
-}
+                {Load? <div><Loading/></div>
+                : 
+                <div>
+                <Navbar/>
+                <Card className={classes.root}>
+          <div className={classes.details}>
+            <CardContent className={classes.content}>
+              <Typography component="h5" variant="h5" className={classes.text} >
+                CREATE ACCOUNT
+              </Typography><br/><br/>
+              {status?
+              <div>
+              <Typography variant="caption" className={classes.texterror}>
+                  *{error}
+                </Typography><br/><br/> </div>
+              :null
+              }
+              <br/>
+            <form id="form33" onSubmit={submitfunction}>
+              <TextField id="outlined-basic" label="Username" variant="outlined" className={classes.text} name="username" required/><br/><br/>
+              <TextField id="outlined-basic" label="Email" variant="outlined" className={classes.text} name="useremail" required/><br/><br/>
+              <TextField id="outlined-password-input" label="Password" type="password"  className={classes.text} name="password" autoComplete="current-password" variant="outlined" required/><br/><br/><br/>
+              <Button variant="contained" color="primary" className={classes.text} type="submit">
+            SignUp
+          </Button><br/><br/>
+          </form>
+          <Typography variant="caption" className={classes.text}>
+              Already have an account? <Link to='/login'>Login</Link>
+              </Typography>
+            </CardContent>
+          </div>
+        </Card>
         </div>
-     );
+    }
+            </div>
+         );
+    }
+
+   
 }
  
 export default Register;

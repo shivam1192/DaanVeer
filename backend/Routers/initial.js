@@ -65,15 +65,15 @@ Route.post("/login",async(req,res)=>{
                 sendrefreshtoken(res,refresh)
                  sendaccesstoken(res,req,access)              
               }catch(error){
-                  console.log(error)
+                  res.status(203).send("Something went wrong!!")
               }
           } 
           else{
-              res.send("Your password is incorrect");
+              res.status(203).send("Your password is incorrect");
           }
     }
     else{
-        res.send("id not exist register now");
+        res.status(203).send("id not exist register now");
     }
 })
 
