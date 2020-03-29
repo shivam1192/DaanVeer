@@ -79,7 +79,7 @@ Route.post("/login",async(req,res)=>{
 
 Route.post('/logout',(req,res)=>{
     res.clearCookie("refreshtoken",{path:'/refresh_token'})
-    return res.send("user logged out")
+    return res.send({accesstoken:""})
 })
 
 Route.post('/protected', async(req,res)=>{
@@ -89,16 +89,20 @@ Route.post('/protected', async(req,res)=>{
                      res.send("This is protected data")
                  }
                  else{
-                     console.log("not logged in")
+                     res.status(203).send("User not logged in")
                  }
 
     }catch(err){
-        res.send("not permitted")
+        res.status(203).send("not permitted")
     }
 })
 
+
+
+
 Route.post('/refresh_token',async(req,res)=>{
     const r = req.cookies.refreshtoken;
+    console.log(r)
     if(!r) return res.send({accesstoken:''})
     let payload = null
     try{
