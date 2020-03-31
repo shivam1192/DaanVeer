@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 const Register = () => {
 
     const {Load,setloadTrue,setloadFalse} = useContext(LoadContext)
-    const {Auth,setauth} = useContext(AuthContext)
+    const {Auth,setauth,statuss,setstatuss} = useContext(AuthContext)
 
     const [select,setSelect] = useState(false)
     const [status,setStatus] = useState(false)
@@ -51,7 +51,7 @@ const Register = () => {
     const submituser = (event) =>{
         event.preventDefault()
         setloadTrue()
-        Axios.post('http://localhost:4000/useregister',{
+        Axios.post('http://localhost:4000/userregister',{
             user_name: event.target.username.value,
             user_email: event.target.useremail.value,
             user_password: event.target.password.value,
@@ -102,8 +102,8 @@ const Register = () => {
   const selectstatengo=()=>{
     setSelect(true)
   }
-
-if(Auth===""&&!regis){
+console.log(Auth,regis,)
+if(!Auth&&!regis){
   return ( 
     <div>
         {Load? <div><Loading/></div>
@@ -197,8 +197,15 @@ else if(regis){
   return(<Redirect to="/login"/>)
 }
 
+else if(statuss===200){
+  return( <Redirect to="/dashboarduser"/>)
+}
+
+else if(statuss===201){
+  return( <Redirect to="/dashboardngo"/>)
+}
 else{
-  return( <Redirect to="/dashboard"/>)
+  return(<div>{statuss}</div>)
 }
     }
 
