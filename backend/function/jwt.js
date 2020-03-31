@@ -12,12 +12,17 @@ const refreshtoken = (id) =>{
     })
 }
 
-const sendaccesstoken = (res,req,accesstoken) =>{
+const sendaccesstoken1 = (res,req,accesstoken) =>{
+    res.status(201).send(
+        accesstoken
+    )   
+}
+const sendaccesstoken0 = (res,req,accesstoken) =>{
     res.send(
         accesstoken
     )   
-   
 }
+
 const sendrefreshtoken = (res,refreshtoken) =>{
     res.cookie("refreshtoken",refreshtoken,{
         httpOnly:false,
@@ -25,4 +30,4 @@ const sendrefreshtoken = (res,refreshtoken) =>{
     })
     console.log("hello")
 }
-module.exports = {accesstoken,refreshtoken,sendaccesstoken,sendrefreshtoken}
+module.exports = {accesstoken,refreshtoken,sendaccesstoken0,sendaccesstoken1,sendrefreshtoken}

@@ -8,19 +8,20 @@ import Axios from 'axios';
 import { AuthContext } from '../Context/AuthContext';
 
 
-const Dashboard = () => {
+const Dashboarduser = () => {
 
     const {Load,setloadTrue,setloadFalse} = useContext(LoadContext)
-    const {Auth,setauth} = useContext(AuthContext)
+    const {Auth,setauth,statuss,setstatuss} = useContext(AuthContext)
 
     let header = {
         headers : {'Authorization' : 'Bearer ' + Auth}
     }
     useEffect(()=>{
+        console.log("jeee")
         setloadTrue()
         const protecteds = () => {
             Axios.post("http://localhost:4000/protected",{},header).then((res)=>{
-                if(res.status===203){
+                if(res.status===200){
                     console.log(res)
                 }else{
                     console.log(res)
@@ -38,8 +39,21 @@ if(Auth===""){
            <div> <Redirect to="/login"/>)</div>
         }
    </div>
-    )}else{
+    )}
+    else if(statuss===201){
+        return(
+            <div>
+            {Load? <div><Loading/></div>
+                :
+               <div> <Redirect to="/dashboardngo"/></div>
+            }
+       </div>
+        )
+    }
+    else{
+        console.log("ji")
     return (  
+        
         <div>
         {Load? <div><Loading/></div>
         :
@@ -71,5 +85,5 @@ if(Auth===""){
 
 }
  
-export default Dashboard
+export default Dashboarduser
 ;

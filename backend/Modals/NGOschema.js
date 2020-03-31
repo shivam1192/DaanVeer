@@ -16,9 +16,9 @@ const NGOmongooseSchema = mongoose.Schema({
         required:true,
         min:6
     },
-    // refreshtoken:{
-    //     type:String
-    // },
+    refreshtoken:{
+        type:String
+    },
     ngo_bio:{
         type:String
     },

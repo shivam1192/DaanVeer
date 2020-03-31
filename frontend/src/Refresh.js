@@ -1,21 +1,26 @@
 import React,{useState, useEffect,useContext} from 'react';
 import { AuthContext } from './Context/AuthContext';
 import Axios from 'axios'
-import Dashboard from './Component/Dashboard'
+import Dashboarduser from './Component/Dashboarduser'
+import Dashboardngo from './Component/Dashboardngo'
+
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
 import Register from './Component/Register'
 import Login from './Component/Login'
 import { LoadContext } from './Context/LoadContext';
 
 const Refresh = (props) => {
-    const {Auth,setauth} = useContext(AuthContext)
+    const {Auth,setauth,statuss,setstatuss} = useContext(AuthContext)
     const {Load,setloadTrue,setloadFalse} = useContext(LoadContext)
 
         useEffect(()=>{
+          console.log("j")
         setloadTrue()
             const refresh = async() =>{
              Axios.post('http://localhost:4000/refresh_token',{},{withCredentials:true}).then((res)=>{
+               console.log(res.status)
                setauth(res.data)
+               setstatuss(res.status)
                setloadFalse()
             }).catch((err)=>{
               console.log("heloo")
@@ -29,7 +34,9 @@ const Refresh = (props) => {
              <Switch>
                  <Route path="/register" component={Register}/>
                  <Route path="/login" component={Login}/>
-                 <Route path="/dashboard" component={Dashboard}/>
+                 <Route path="/dashboarduser" component={Dashboarduser}/>
+                 <Route path="/dashboardngo" component={Dashboardngo}/>
+
              </Switch>
          </BrowserRouter>
            </div>

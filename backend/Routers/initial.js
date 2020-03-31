@@ -5,7 +5,7 @@ const NGOMongoosemodal = require("../Modals/NGOschema")
 const Joi = require("@hapi/joi");
 const bcrypt = require("bcryptjs");
 const Jwt = require("jsonwebtoken");
-const {accesstoken,refreshtoken,sendaccesstoken,sendrefreshtoken} = require("../function/jwt");
+const {accesstoken,refreshtoken,sendaccesstoken0,sendaccesstoken1,sendrefreshtoken} = require("../function/jwt");
 const {isAuth} = require('../function/isAuth')
 
 
@@ -24,13 +24,6 @@ const ngo_schema = Joi.object({
     ngo_password: Joi.string().required().min(6),
     ngo_bio : Joi.string().required(),
     is_ngo: Joi.boolean().required()
-})
-
-
-const login_user_schema = Joi.object({
-    user_email: Joi.string().required().min(6).email(),
-    user_password: Joi.string().required().min(6),
-    refreshtoken: Joi.string()
 })
 
 Route.post("/userregister",async (req,res)=>{
@@ -122,7 +115,7 @@ Route.post("/login",async(req,res)=>{
                 const set= await UserMongoosemodal.updateOne({_id:got_useremail._id},{$set : {refreshtoken: refresh}})
                 // send refrestoken as a cookie and accesscookie as a regular expression
                 sendrefreshtoken(res,refresh)
-                 sendaccesstoken(res,req,access,got_useremail)              
+                 sendaccesstoken0(res,req,access,got_useremail)              
               }catch(error){
                   console.log(error)
                   res.status(203).send("Something went wrong!!")
@@ -143,7 +136,8 @@ Route.post("/login",async(req,res)=>{
                     const set= await NGOMongoosemodal.updateOne({_id:got_ngoemail._id},{$set : {refreshtoken: refresh}})
                     // send refrestoken as a cookie and accesscookie as a regular expression
                     sendrefreshtoken(res,refresh)
-                     sendaccesstoken(res,req,access,got_ngoemail)              
+                     sendaccesstoken1(res,req,access,got_ngoemail)     
+                     res.send("hello")         
                   }catch(error){
                       res.status(203).send("Something went wrong!!")
                   }
@@ -184,23 +178,37 @@ Route.post('/protected', async(req,res)=>{
 Route.post('/refresh_token',async(req,res)=>{
     const r = req.cookies.refreshtoken;
     console.log(r)
-    if(!r) return res.send("")
+    if(!r) return res.status(203).send("")
     let payload = null
     try{
          payload = Jwt.verify(r,process.env.REFRESH_TOKEN)
     }catch(err){
-        return res.send("")
+        return res.status(203).send("")
     }
     const user = await UserMongoosemodal.find({_id:payload.id})
-        if(!user) return res.send("")
-    if(!user.refreshtoken==r) return res.send("")
+    const ngo = await NGOMongoosemodal.find({_id:payload.id})
+console.log(user)
+    if(user.length!=0){
+        console.log("user")
+        if(!user) return res.status(203).send("")
+    if(!user.refreshtoken==r) return res.status(203).send("")
 
     const access = accesstoken(user._id)
-    const refresh = refreshtoken(user._id)
-
 
         const set= await UserMongoosemodal.updateOne({_id:user._id},{$set : {refreshtoken: r}})
-                return res.send(access)
+                return res.status(200).send(access)
+    }
+    else{
+        console.log("ngo")
+        if(!ngo) return res.status(203).send("")
+    if(!ngo.refreshtoken==r) return res.status(203).send("")
+
+    const access = accesstoken(ngo._id)
+
+        const set= await NGOMongoosemodal.updateOne({_id:ngo._id},{$set : {refreshtoken: r}})
+                return res.status(201).send(access)
+    }
+       
 })
 
 

@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 
 const Login = () => {
     const {Load,setloadTrue,setloadFalse} = useContext(LoadContext)
-    const {Auth,setauth} = useContext(AuthContext)
+    const {Auth,setauth,statuss,setstatuss} = useContext(AuthContext)
 
     const [status,setStatus] = useState(false)
     const [error,setError] = useState()
@@ -56,8 +56,10 @@ const Login = () => {
         },{
           withCredentials:true
         }).then((res)=>{
-            if(res.status==200){
+            if(res.status==200||res.status==201){
+              console.log(res)
                 setStatus(false)
+                setstatuss(res.status)
                 setauth(res.data)
                 setLogin(true)
             }else{
@@ -105,12 +107,21 @@ const Login = () => {
                 </div>
              );
             }
+            else if(statuss==201){
+              return(
+                <div>
+                {Load? <div><Loading/></div>
+                    :
+                   <div> <Redirect to="/dashboardngo"/>)</div>
+                }
+           </div>
+              )}
             else{
                 return(
                   <div>
                   {Load? <div><Loading/></div>
                       :
-                     <div> <Redirect to="/dashboard"/>)</div>
+                     <div> <Redirect to="/dashboarduser"/>)</div>
                   }
              </div>
                 )}
