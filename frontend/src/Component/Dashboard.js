@@ -17,29 +17,28 @@ const Dashboard = () => {
         headers : {'Authorization' : 'Bearer ' + Auth}
     }
     useEffect(()=>{
+        setloadTrue()
         const protecteds = () => {
             Axios.post("http://localhost:4000/protected",{},header).then((res)=>{
                 if(res.status===203){
                     console.log(res)
                 }else{
                     console.log(res)
-                }
+                }setloadFalse()
            })
         }
       protecteds()
     },[])
 
-    const logoutfunction = () =>{
-        Axios.post("http://localhost:4000/logout",{},{withCredentials:true}).then((res)=>{
-            setauth(res.data)
-        }).catch((err)=>{
-             alert("something went wrong")
-        })
-    }
-
 if(Auth===""){
-    return(<Redirect to="/login"/>)
-}else{
+    return(
+        <div>
+        {Load? <div><Loading/></div>
+            :
+           <div> <Redirect to="/login"/>)</div>
+        }
+   </div>
+    )}else{
     return (  
         <div>
         {Load? <div><Loading/></div>
@@ -63,7 +62,6 @@ if(Auth===""){
                         <Paper style={{height:220,marginTop:20}}>hello</Paper>
                      </Grid>
                 </Grid>
-                <Button onClick={logoutfunction}>Logout</Button>
         </div>
 }
     </div>

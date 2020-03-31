@@ -4,7 +4,7 @@ import Axios from 'axios'
 export const AuthContext = createContext()
 
 const AuthContextProvider = (props) => {
-    const [Auth,setAuth] = useState("")
+    const [Auth,setAuth] = useState()
 
    
     const setauth= (data) =>{

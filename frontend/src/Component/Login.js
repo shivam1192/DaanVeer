@@ -106,12 +106,15 @@ const Login = () => {
              );
             }
             else{
-              return(
-                <Redirect to="/dashboard"/>
-              )
-            }
+                return(
+                  <div>
+                  {Load? <div><Loading/></div>
+                      :
+                     <div> <Redirect to="/dashboard"/>)</div>
+                  }
+             </div>
+                )}
          }
  
 export default Login;
 
-//task: Navbar, refresh_token api call
