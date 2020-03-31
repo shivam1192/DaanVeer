@@ -16,11 +16,12 @@ const sendaccesstoken = (res,req,accesstoken) =>{
     res.send(
         accesstoken
     )   
+   
 }
 const sendrefreshtoken = (res,refreshtoken) =>{
     res.cookie("refreshtoken",refreshtoken,{
-        httpOnly:true,
-        path: '/refresh_token'
+        httpOnly:false,
+        path:"/"
     })
     console.log("hello")
 }

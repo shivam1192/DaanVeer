@@ -47,18 +47,15 @@ const Login = () => {
 
     const classes = useStyles();
 
-    useEffect(()=>{
-      console.log(Auth)
-    },[Auth])
-
-
     const submitfunction = (event) =>{
         event.preventDefault()
         setloadTrue()
         Axios.post('http://localhost:4000/login',{
-            user_email:event.target.useremail.value,
-            user_password:event.target.password.value
-        },{withCredentials:true}).then((res)=>{
+            email:event.target.useremail.value,
+            password:event.target.password.value
+        },{
+          withCredentials:true
+        }).then((res)=>{
             if(res.status==200){
                 setStatus(false)
                 setauth(res.data)
@@ -72,7 +69,7 @@ const Login = () => {
             console.log(err)
         })
     } 
-            if(!login){
+            if(Auth===""){
               return ( 
                 <div>
                     {Load? <div><Loading/></div>

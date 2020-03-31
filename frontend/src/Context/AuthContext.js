@@ -4,15 +4,11 @@ import Axios from 'axios'
 export const AuthContext = createContext()
 
 const AuthContextProvider = (props) => {
-    const [Auth,setAuth] = useState({
-        Accesstoken: ""
-    })
+    const [Auth,setAuth] = useState("")
 
    
     const setauth= (data) =>{
-        setAuth({
-            Accesstoken:data
-        })
+        setAuth(data)
     }
     
     return ( 

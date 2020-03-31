@@ -13,9 +13,12 @@ const Dashboard = () => {
     const {Load,setloadTrue,setloadFalse} = useContext(LoadContext)
     const {Auth,setauth} = useContext(AuthContext)
 
+    let header = {
+        headers : {'Authorization' : 'Bearer ' + Auth}
+    }
     useEffect(()=>{
         const protecteds = () => {
-            Axios.post("http://localhost:4000/protected").then((res)=>{
+            Axios.post("http://localhost:4000/protected",{},header).then((res)=>{
                 if(res.status===203){
                     console.log(res)
                 }else{
@@ -24,17 +27,19 @@ const Dashboard = () => {
            })
         }
       protecteds()
-    })
+    },[])
 
     const logoutfunction = () =>{
-        Axios.post("http://localhost:4000/logout").then((res)=>{
+        Axios.post("http://localhost:4000/logout",{},{withCredentials:true}).then((res)=>{
             setauth(res.data)
         }).catch((err)=>{
              alert("something went wrong")
         })
     }
 
-
+if(Auth===""){
+    return(<Redirect to="/login"/>)
+}else{
     return (  
         <div>
         {Load? <div><Loading/></div>
@@ -63,6 +68,8 @@ const Dashboard = () => {
 }
     </div>
     )
+}
+    
 
 }
  

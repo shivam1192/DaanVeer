@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const mongooseSchema = mongoose.Schema({
+const usermongooseSchema = mongoose.Schema({
      user_name:{
          type:String,
          required:true,
@@ -18,9 +18,13 @@ const mongooseSchema = mongoose.Schema({
     },
     refreshtoken:{
         type:String
+    },
+    user_mobile_no:{
+        type:Number,
+        required:true,
     }
 })
 
-const mongooseModal = mongoose.model("users",mongooseSchema)
+const usermongooseModal = mongoose.model("users",usermongooseSchema)
 
-module.exports = mongooseModal;
+module.exports = usermongooseModal;
