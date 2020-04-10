@@ -5,7 +5,7 @@ import {Link, Redirect} from 'react-router-dom'
 import {Card,CardContent,Typography,makeStyles,TextField,Button,Radio,FormControl,FormLabel,FormControlLabel,RadioGroup} from '@material-ui/core'
 import Axios from 'axios'
 import Loading from '../Structure/Loading'
-import Navbar from '../Structure/Navbar';
+import Navbar2 from '../Structure/Navbar2';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -109,7 +109,7 @@ if(!Auth&&!regis){
         {Load? <div><Loading/></div>
         : 
         <div>
-        <Navbar/><br/>
+        <Navbar2/><br/>
 <center>               <FormControl component="fieldset">
 <FormLabel component="legend"></FormLabel>
 <RadioGroup row aria-label="position" name="position" defaultValue="start">

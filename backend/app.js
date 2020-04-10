@@ -12,7 +12,11 @@ app.use(cors({
     origin: 'http://localhost:3000', credentials: true
 }));
 app.use(cookie())
+
+
 app.use("/",require("./Routers/initial"));
+
+
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Origin', req.headers.origin);

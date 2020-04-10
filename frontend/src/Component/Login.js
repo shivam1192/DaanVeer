@@ -6,7 +6,7 @@ import {Link, Redirect} from 'react-router-dom'
 import {Card,CardContent,Typography,makeStyles,TextField,Button} from '@material-ui/core'
 import Axios from 'axios'
 import Loading from '../Structure/Loading'
-import Navbar from '../Structure/Navbar'
+import Navbar2 from '../Structure/Navbar2'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -77,7 +77,7 @@ const Login = () => {
                     {Load? <div><Loading/></div>
                     :
                     <div>
-                        <Navbar/> 
+                        <Navbar2/> 
                     <Card className={classes.root}>
               <div className={classes.details}>
                 <CardContent className={classes.content}>

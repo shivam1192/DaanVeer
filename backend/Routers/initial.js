@@ -1,14 +1,13 @@
 const express = require("express");
 const Route = express.Router();
 const UserMongoosemodal = require("../Modals/Userschema");
-const NGOMongoosemodal = require("../Modals/NGOschema")
+const NGOMongoosemodal = require("../Modals/NGOschema");
+const BlogMongoosemodal = require("../Modals/Blogschema");
 const Joi = require("@hapi/joi");
 const bcrypt = require("bcryptjs");
 const Jwt = require("jsonwebtoken");
 const {accesstoken,refreshtoken,sendaccesstoken0,sendaccesstoken1,sendrefreshtoken} = require("../function/jwt");
 const {isAuth} = require('../function/isAuth')
-
-
 
 
 const user_schema = Joi.object({
@@ -25,6 +24,7 @@ const ngo_schema = Joi.object({
     ngo_bio : Joi.string().required(),
     is_ngo: Joi.boolean().required()
 })
+
 
 Route.post("/userregister",async (req,res)=>{
     const {user_name,user_email,user_password,user_mobile_no} = req.body;
@@ -211,6 +211,35 @@ console.log(user)
        
 })
 
+Route.post("/createblog",async(req,res)=>{
+     const {Blog_title,Blog_content,Blog_amount,Blog_wallet,Blog_author} = req.body;
+    const got_blogauthor = await NGOMongoosemodal.findOne({refreshtoken:Blog_author})
+     
+     const new_blog = new BlogMongoosemodal({
+        Blog_title,
+        Blog_content,
+        Blog_amount,
+        Blog_wallet,
+        Blog_author:got_blogauthor._id
+    })
+    try{
+           const saveblog = await new_blog.save();
+           res.send(saveblog._id)
+    }catch(error){
+       res.status(203).send("Something wrong occured")
+    }
+})
 
+Route.get("/blogbyngo/:id",async(req,res)=>{
+     const refresh = req.params.id
+     const got_blogauthor = await NGOMongoosemodal.findOne({refreshtoken:refresh})
+     const got_blog = await BlogMongoosemodal.find({Blog_author:got_blogauthor._id})
+     res.send(got_blog)
+})
+
+Route.get("/blog",async(req,res)=>{
+    const got_blogauthor = await BlogMongoosemodal.find()
+    res.send(got_blogauthor)
+})
 
 module.exports = Route;

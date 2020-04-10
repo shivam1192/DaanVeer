@@ -1,7 +1,7 @@
 import React,{useContext,useEffect,useState} from 'react';
 import {LoadContext} from '../Context/LoadContext'
 import {Redirect} from 'react-router-dom'
-import Navbar from '../Structure/Navbar'
+import Navbar2 from '../Structure/Navbar2'
 import Loading from '../Structure/Loading'
 import {Grid,Paper,makeStyles, Button} from '@material-ui/core'
 import Axios from 'axios';
@@ -58,7 +58,7 @@ if(Auth===""){
         {Load? <div><Loading/></div>
         :
         <div>
-            <Navbar/> 
+            <Navbar2/> 
                 <Grid container spacing={3}>
                     <Grid item sm={3}>
                         <Paper style={{height:220,marginTop:20,marginLeft:120}}>hello</Paper>
