@@ -242,4 +242,10 @@ Route.get("/blog",async(req,res)=>{
     res.send(got_blogauthor)
 })
 
-module.exports = Route;
+Route.get("/blogauthor/:id",async(req,res)=>{
+    const id = req.params.id
+    const got_blogauthor = await NGOMongoosemodal.findOne({_id:id})
+    res.send(got_blogauthor)
+})
+
+module.exports = Route

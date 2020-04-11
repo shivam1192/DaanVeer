@@ -1,3 +1,4 @@
+
 import React,{useContext,useEffect,useState} from 'react';
 import {LoadContext} from '../Context/LoadContext'
 import {Redirect} from 'react-router-dom'
@@ -6,7 +7,7 @@ import Loading from '../Structure/Loading'
 import {Grid,Paper,makeStyles, Button,Divider,Drawer,Hidden,List,ListItem,ListItemText,useTheme,Typography} from '@material-ui/core'
 import Axios from 'axios';
 import { AuthContext } from '../Context/AuthContext';
-import Blogform from './Blogform'
+
 import Contentfetch from './Contentfetch'
 
 
@@ -66,7 +67,7 @@ const Dashboardngo = (props) => {
                 <ListItemText>Create New Project</ListItemText>
               </ListItem>
               <ListItem button onClick={()=>{setCount(2)}}>
-                <ListItemText>Show all project raised</ListItemText>
+                <ListItemText>Show project raised by you</ListItemText>
               </ListItem>
           </List>
          
