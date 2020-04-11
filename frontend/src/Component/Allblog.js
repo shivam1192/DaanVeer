@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
-import {Card,CardActionArea,CardContent,Typography,Button,makeStyles,CardActions,withStyles} from '@material-ui/core'
+import {Card,CardActionArea,CardContent,Typography,Button,makeStyles,CardActions,withStyles,TextField} from '@material-ui/core'
 import Blogauthor from '../Structure/Blogauthor'
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -68,8 +68,9 @@ const Blog = () => {
     const [Blog,setBlog] = useState([])
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
+    const [ind,setInd] = useState(0)
+    const handleClickOpen = (i) => {
+        setInd(i)
       setOpen(true);
     };
     const handleClose = () => {
@@ -98,10 +99,11 @@ const Blog = () => {
     //    getdata()
     // }
 if(Blog.length!=0){
+    
        return(
            <div className = {classes.root}>
            <div className={classes.container}>
-               { Blog.map((i)=>{
+               { Blog.map((i,index)=>{  
         return(
         <Card className={classes.roots}>
         <CardActionArea>
@@ -118,45 +120,46 @@ if(Blog.length!=0){
             <Typography variant="body2" color="textSecondary" component="p">
               Total Amount Required : {i.Blog_amount}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Wallet Address : {i.Blog_wallet}
-            </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
           <Button size="small" color="primary" className="classes.button">
             Amount Raised
           </Button>
-          <Button size="small" color="primary" className="classes.button" onClick={handleClickOpen}>
+          <Button size="small" color="primary" className="classes.button" onClick={()=>{handleClickOpen(index)}}>
                 Donate
           </Button>
-          <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+        </CardActions>
+      </Card>)
+    })} 
+      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Modal title
+          {Blog.map((data,i)=>{
+              if(i==ind){
+                  return (
+                      <div>Donate for {data.Blog_title}</div>
+                  )} })}
         </DialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            {i.Blog_wallet}
-          </Typography>
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-            lacus vel augue laoreet rutrum faucibus dolor auctor.
-          </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-            scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-            auctor fringilla.
+          <TextField
+          id="outlined-textarea"
+          label="Donate Amount"
+          variant="outlined"
+        /><br/><br/><br/>
+          <Typography variant="body2" color="textSecondary" component="p">
+          {Blog.map((data,i)=>{
+              if(i==ind){
+                  return (
+                      <div>Project Wallet Address : {data.Blog_wallet}</div>
+                  )} })}
           </Typography>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
-            Save changes
+            Donate
           </Button>
         </DialogActions>
       </Dialog>
-        </CardActions>
-      </Card>)
-    })}
                </div>
                </div>
        )
