@@ -8,12 +8,8 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import Web3 from 'web3'
-import transferabi from '../abi/Transfers.json'
+import {web3,transfer} from '../App'
 
-const web3 = new Web3(Web3.givenProvider||"http://localhost:8545")
-window.ethereum.enable()
-const transfer = new web3.eth.Contract(transferabi.abi,"0x6aD3fb304A5Fb857FC2744376b6BF23d9Ea5553D")
 
 const useStyles = makeStyles({
     roots: {
@@ -94,8 +90,7 @@ const Blog = () => {
         e.preventDefault()
         let amount = e.target.amount.value
         let sender = await web3.eth.getAccounts()
-            const he = await transfer.methods.setTransaction(address).send({from:sender[0] , value: web3.utils.toWei(amount,"ether")})
-            console.log(he)
+            const sentfromaccount = await transfer.methods.setTransaction(address).send({from:sender[0] , value: web3.utils.toWei(amount,"ether")})
     }
 if(Blog.length!=0){
     

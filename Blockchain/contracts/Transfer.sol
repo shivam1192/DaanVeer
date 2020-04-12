@@ -32,9 +32,8 @@ contract Transfer{
             }
         }
     }
-
-    function getAllSenderAccount() public view returns(address[] memory){
-        return senderaccounts;
+   function getAllSenderAccount() public view returns(address[] memory){
+        return (senderaccounts);
     }
     function getAllInfoByAccount(address _sender) public view returns(Passbook[] memory){
         return Passbooks[_sender];

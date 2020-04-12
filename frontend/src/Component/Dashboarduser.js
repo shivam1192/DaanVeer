@@ -66,6 +66,12 @@ const Dashboarduser = (props) => {
               <ListItem button onClick={()=>{setCount(1)}}>
                 <ListItemText>Show all projects</ListItemText>
               </ListItem>
+              <ListItem button onClick={()=>{setCount(2)}}>
+                <ListItemText>Show all donation made by you</ListItemText>
+              </ListItem>
+              <ListItem button onClick={()=>{setCount(3)}}>
+                <ListItemText>Show all donater</ListItemText>
+              </ListItem>
           </List>
          
         </div>
