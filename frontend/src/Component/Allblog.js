@@ -8,8 +8,12 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import Web3 from 'web3'
+import transferabi from '../abi/Transfers.json'
 
-
+const web3 = new Web3(Web3.givenProvider||"http://localhost:8545")
+window.ethereum.enable()
+const transfer = new web3.eth.Contract(transferabi.abi,"0x6aD3fb304A5Fb857FC2744376b6BF23d9Ea5553D")
 
 const useStyles = makeStyles({
     roots: {
@@ -86,18 +90,13 @@ const Blog = () => {
         }
        getdata()
     },[])
-
-    // const getauthor = (id) =>{
-    //     console.log("hello")
-    //     const getdata = async() =>{
-    //         let url = "http://localhost:4000/blogauthor/"+id
-    //         Axios.get(url).then((res)=>{
-    //              return (<div>{res.data.ngo_name}</div>)
-    //     }).catch((err)=>{
-    //         console.log(err)
-    //     })}
-    //    getdata()
-    // }
+    const check = async(e,address) =>{
+        e.preventDefault()
+        let amount = e.target.amount.value
+        let sender = await web3.eth.getAccounts()
+            const he = await transfer.methods.setTransaction(address).send({from:sender[0] , value: web3.utils.toWei(amount,"ether")})
+            console.log(he)
+    }
 if(Blog.length!=0){
     
        return(
@@ -140,11 +139,20 @@ if(Blog.length!=0){
                       <div>Donate for {data.Blog_title}</div>
                   )} })}
         </DialogTitle>
+        <form onSubmit={(e)=>{
+            Blog.map((data,i)=>{
+                if(i==ind){
+                    check(e,data.Blog_wallet)
+                }
+            })
+            }}>
         <DialogContent dividers>
           <TextField
           id="outlined-textarea"
           label="Donate Amount"
           variant="outlined"
+          required
+          name="amount"
         /><br/><br/><br/>
           <Typography variant="body2" color="textSecondary" component="p">
           {Blog.map((data,i)=>{
@@ -155,10 +163,11 @@ if(Blog.length!=0){
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
+          <Button autoFocus color="primary" type="submit">
             Donate
           </Button>
         </DialogActions>
+        </form>
       </Dialog>
                </div>
                </div>
