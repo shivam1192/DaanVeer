@@ -25,9 +25,6 @@ Smart contract make easy for storing all the transaction history and and their d
  - In frontend folder run npm start, this will start your application on localhost  3000.
 **Run application in Mozilla Firefox because it used cookies to store refresh token.**
 
-# ScreenShots
-![Image description](1.jpeg)
-
 # Stack used
  - ReactJS
  - NodeJS
