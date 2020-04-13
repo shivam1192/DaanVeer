@@ -26,7 +26,7 @@ Smart contract make easy for storing all the transaction history and and their d
 **Run application in Mozilla Firefox because it used cookies to store refresh token.**
 
 # ScreenShots
-![Image description](blob:file:///9a2dce90-5287-43b0-979c-04b1eab1796a)
+![Image description](1.jpeg)
 
 # Stack used
  - ReactJS
