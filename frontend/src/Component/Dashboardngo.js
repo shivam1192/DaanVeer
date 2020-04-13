@@ -69,6 +69,9 @@ const Dashboardngo = (props) => {
               <ListItem button onClick={()=>{setCount(2)}}>
                 <ListItemText>Show project raised by you</ListItemText>
               </ListItem>
+              <ListItem button onClick={()=>{setCount(3)}}>
+                <ListItemText>Show All Donation Globally</ListItemText>
+              </ListItem>
           </List>
          
         </div>

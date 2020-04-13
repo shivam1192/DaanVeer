@@ -9,8 +9,8 @@ contract Transfer{
     }
     mapping (address => Passbook[]) Passbooks ;
     address[] senderaccounts;
-
-    function setTransaction(address _ngo) public payable{
+    uint256[] sum;
+    function setTransaction(address payable _ngo) public payable{
         uint256 c = 0;
         for(uint256 i = 0;i<Passbooks[msg.sender].length;i++){
             if(Passbooks[msg.sender][i].ngo == _ngo){
@@ -22,15 +22,19 @@ contract Transfer{
                 Passbooks[msg.sender].push(newEntry);
                 senderaccounts.push(msg.sender);
             }
+        _ngo.transfer(msg.value);
     }
 
-    function getTransaction(address payable _ngo) public{
-        for(uint256 i = 0 ;i < Passbooks[msg.sender].length;i++){
-            if(Passbooks[msg.sender][i].ngo==_ngo){
-                _ngo.transfer(Passbooks[msg.sender][i].count);
-                Passbooks[msg.sender][i].count = 0;
+    function getNGODonaterCount(address _ngo) public returns(uint[] memory){
+           delete sum;
+           for(uint i = 0;i < senderaccounts.length;i++){
+            for(uint j = 0;j < Passbooks[senderaccounts[i]].length;j++){
+                if(Passbooks[senderaccounts[i]][j].ngo==_ngo){
+                    sum.push(Passbooks[senderaccounts[i]][j].count);
+                }
             }
         }
+        return sum;
     }
    function getAllSenderAccount() public view returns(address[] memory){
         return (senderaccounts);

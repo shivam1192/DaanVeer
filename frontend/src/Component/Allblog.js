@@ -14,13 +14,14 @@ import {web3,transfer} from '../App'
 const useStyles = makeStyles({
     roots: {
       width: 340,
-      border: "1px solid blue"
+      border: "1px solid blue",
+      height:300
     },
     container:{
         display:'flex',
         flexDirection:'row',
         flexWrap:'wrap',
-        justifyContent:'space-between',
+        justifyContent:'space-around',
         alignItems:'center'
     },
     
@@ -90,7 +91,7 @@ const Blog = () => {
         e.preventDefault()
         let amount = e.target.amount.value
         let sender = await web3.eth.getAccounts()
-            const sentfromaccount = await transfer.methods.setTransaction(address).send({from:sender[0] , value: web3.utils.toWei(amount,"ether")})
+            const sentfromaccount = await transfer.methods.setTransaction(address).send({from:sender[0], to:address, value: web3.utils.toWei(amount,"ether")})
     }
 if(Blog.length!=0){
     
@@ -117,9 +118,6 @@ if(Blog.length!=0){
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary" className="classes.button">
-            Amount Raised
-          </Button>
           <Button size="small" color="primary" className="classes.button" onClick={()=>{handleClickOpen(index)}}>
                 Donate
           </Button>
