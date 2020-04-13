@@ -18,11 +18,11 @@ The smart contract makes easy for storing all the transaction history and their
 - /dashboarduser
 
 # How to use locally?
- - Clone project and ensure to have node and Ganache platform.
- - Run npm install to install all dependency.
- - Add your MongoDB cluster link (MONGOOSE_CONNECT), LocalHost (LOCALHOST), access token secret (ACCESS_TOKEN) and refresh token secret (REFRESH_TOKEN) in an environment variable in backend folder.
- - run cd backend and node app.js, this will start your server
- - In frontend folder run npm start, this will start your application on localhost  3000.
+- Clone project and ensure to have node and Ganache platform.
+- Run npm install to install all dependency.
+- Add your MongoDB cluster link (MONGOOSE_CONNECT), LocalHost (LOCALHOST), access token secret (ACCESS_TOKEN) and refresh token secret (REFRESH_TOKEN) in an environment variable in backend folder.
+- run cd backend and node app.js, this will start your server
+- In frontend folder run npm start, this will start your application on localhost  3000.
 **Run application in Mozilla Firefox because it used cookies to store refresh token.**
 
 # Stack used
