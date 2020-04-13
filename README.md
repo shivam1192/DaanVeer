@@ -11,6 +11,22 @@ From the above point, A total of 84% of people donated in which 27% of people do
 First user have to register through an app if he/she wants to donate to a NGO. NGO also have to register first so that they can arise project provided with Amount, wallet address and short description. NGO can track the amount donated to the particular project and can see all the amounts that will be donated accross the network. Once Project is raised donater can easily donate to the project raised and can see all his donation history and all the address which made a transaction.
 Smart contract make easy for storing all the transaction history and and their details.
 
+# Useful Route
+ - /register
+ - /login
+ - /dashboardngo
+ - /dashboarduser
+
+# How to use locally?
+ - Clone project and ensure to have node and Ganache platform.
+ - Run npm install to install all dependency.
+ - Add your mongodb cluster link (MONGOOSE_CONNECT), LocalHost (LOCALHOST), access token secret (ACCESS_TOKEN) and refresh token secret (REFRESH_TOKEN) in environment variable in backend folder.
+ - run cd backend and node app.js, this will start your server
+ - In frontend folder run npm start, this will start your application on localhost  3000.
+
+# ScreenShots
+
+
 # Stack used
  - ReactJS
  - NodeJS
