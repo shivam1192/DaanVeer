@@ -23,6 +23,7 @@ Smart contract make easy for storing all the transaction history and and their d
  - Add your mongodb cluster link (MONGOOSE_CONNECT), LocalHost (LOCALHOST), access token secret (ACCESS_TOKEN) and refresh token secret (REFRESH_TOKEN) in environment variable in backend folder.
  - run cd backend and node app.js, this will start your server
  - In frontend folder run npm start, this will start your application on localhost  3000.
+**Run application in Mozilla Firefox because it used cookies to store refresh token.**
 
 # ScreenShots
 
@@ -36,3 +37,4 @@ Smart contract make easy for storing all the transaction history and and their d
  - Ethereum
  - Truffle
 # Video Link
+https://drive.google.com/file/d/1zrRFVtEWlgvHVtZTm5a3k1_5J7f40eB_/view?usp=sharing
