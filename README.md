@@ -35,5 +35,3 @@ The smart contract makes easy for storing all the transaction history and their
 - Truffle
 # Video Link
 https://drive.google.com/file/d/1zrRFVtEWlgvHVtZTm5a3k1_5J7f40eB_/view?usp=sharing
-# Screenshot
-![Image1](https://drive.google.com/open?id=1DwoUAi2-Hxum8BVTeGGnTrFk2muidQVK)
