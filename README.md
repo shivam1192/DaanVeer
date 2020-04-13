@@ -9,13 +9,13 @@ From the above point, A total of 84% of people donated in which 27% of people do
 **DaanVeer** is a Blockchain-based donation app running on a decentralized system in which donators can easily donate to the registered NGO's. All the transaction occurred on Ethereum platform uses Ether as a transaction digital currency. The app removes the control of the central authority. All the Transaction history is maintained in a blockchain network. Blockchain makes the app more secure, trustable and fast. The use of it made donators know where their money is used which probably increases the percentage of donation in India.
 # About
 The first user have to register through an app if he/she wants to donate to an NGO. NGOs also have to register first so that they can arise project provided with Amount, wallet address and a short description. NGO can track the amount donated to the particular project and can see all the amounts that will be donated across the network. Once Project is raised donators can easily donate to the project raised and can see all his donation history and all the address which made a transaction.
-The smartcontract makes easy for storing all the transaction history and their details.
+The smart contract makes easy for storing all the transaction history and their details.
 
 # Useful Route
- - /register
- - /login
- - /dashboardngo
- - /dashboarduser
+  - /register
+  - /login
+  - /dashboardngo
+  - /dashboarduser
 
 # How to use locally?
  - Clone project and ensure to have node and Ganache platform.
@@ -26,12 +26,12 @@ The smartcontract makes easy for storing all the transaction history and their 
 **Run application in Mozilla Firefox because it used cookies to store refresh token.**
 
 # Stack used
- - ReactJS
- - NodeJS
- - Express
- - MongoDB
- - Solidity
- - Ethereum
- - Truffle
+  - ReactJS
+  - NodeJS
+  - Express
+  - MongoDB
+  - Solidity
+  - Ethereum
+  - Truffle
 # Video Link
 https://drive.google.com/file/d/1zrRFVtEWlgvHVtZTm5a3k1_5J7f40eB_/view?usp=sharing
