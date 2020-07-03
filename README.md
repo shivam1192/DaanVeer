@@ -8,7 +8,7 @@ During the crisis of COVID-19, many countries are trying to fight with this pest
 From the above point, A total of 84% of people donated in which 27% of people donated to NGOs or charitable organizations. From the third and fourth points, it is clear that most of the people donated directly to beneficiaries so that they can see how their donation is being used. Lack of donations in NGOs is because they don't know how their donation is being used.
 **DaanVeer** is a Blockchain-based donation app running on a decentralized system in which donators can easily donate to the registered NGO's. All the transaction occurred on Ethereum platform uses Ether as a transaction digital currency. The app removes the control of the central authority. All the Transaction history is maintained in a blockchain network. Blockchain makes the app more secure, trustable and fast. The use of it made donators know where their money is used which probably increases the percentage of donation in India.
 
-![alt text](https://drive.google.com/file/d/1vzTcMryA_OoPul4xEiG6sYAHpGdAOk9C/view?usp=sharing)
+![alt text(https://res.cloudinary.com/dccdbexhh/image/upload/v1593772009/WhatsApp_Image_2020-06-13_at_23.20.27_ucqomk.jpg)
 
 
 # About
